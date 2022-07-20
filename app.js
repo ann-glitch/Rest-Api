@@ -2,18 +2,18 @@ const express = require("express");
 const app = express();
 const port = 2000;
 const mongoose = require("mongoose");
-require("dotenv/config");
 const bodyParser = require("body-parser");
-
-//anytime we call the app, it uses body parser
-app.use(bodyParser.json());
+const cors = require("cors");
+require("dotenv/config");
 
 //import routes
 const postsRoute = require("./routes/posts");
 const { parseTwoDigitYear } = require("moment");
 
-//middleware(you can have multiple middleware)
+//middlewares
+app.use(bodyParser.json());
 app.use("/posts", postsRoute);
+app.use(cors());
 
 //routes
 app.get("/", (req, res) => {
